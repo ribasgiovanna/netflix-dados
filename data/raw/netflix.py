@@ -1,9 +1,10 @@
 import pandas as pd
-import os
-import glob
+from pathlib import Path
 
-caminho_pasta = r'data\raw'
-arquivos = glob.glob(os.path.join(caminho_pasta, "*.xlsx"))
+BASE = Path(__file__).resolve().parents[2]
+pasta_entrada = BASE / 'data' / 'raw'
+pasta_saida = BASE / 'data' / 'ready'
+arquivos = sorted(pasta_entrada.glob('*.xlsx'))
 
 dfs = []
 
@@ -14,7 +15,7 @@ else:
 
         try:
             df_temp = pd.read_excel(arquivo)
-            file_name = os.path.basename(arquivo)
+            file_name = arquivo.name
             if 'brasil' in file_name.lower():
                 df_temp['País'] = 'Br'
             elif 'france' in file_name.lower():
@@ -35,10 +36,9 @@ else:
             print(f'Erro ao ler o arquivo {arquivo}: {e}')
 if dfs:
     resultado = pd.concat(dfs, ignore_index = True)
-    pasta_saida = os.path.join('data', 'ready')
-    os.makedirs(pasta_saida, exist_ok=True)
-    caminho_excel = os.path.join(pasta_saida, 'clean.xlsx')
-    caminho_csv = os.path.join(pasta_saida, 'clean.csv')
+    pasta_saida.mkdir(parents=True, exist_ok=True)
+    caminho_excel = pasta_saida / 'clean.xlsx'
+    caminho_csv = pasta_saida / 'clean.csv'
 
     with pd.ExcelWriter(caminho_excel, engine='xlsxwriter') as writer:
         resultado.to_excel(writer, index=False)

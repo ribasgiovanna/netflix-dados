@@ -47,8 +47,9 @@ pip install pandas xlsxwriter openpyxl
 python data/raw/netflix.py
 ```
 
-Execute a partir da raiz do projeto. Para acrescentar fontes, coloque novas planilhas
-em `data/raw/` seguindo o padrão de nome `..._pais.xlsx`.
+Os caminhos são resolvidos a partir do próprio script, então funciona de qualquer
+diretório. Para acrescentar fontes, coloque novas planilhas em `data/raw/` seguindo
+o padrão de nome `..._pais.xlsx`.
 
 ## 👤 Autoria
 
