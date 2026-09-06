@@ -19,6 +19,8 @@ Fictional data, created to practice ETL. No real customer information.
 
 **Output:** `data/ready/clean.csv` and `data/ready/clean.xlsx`
 
+![Before and after the pipeline](docs/before-after.png)
+
 ## Tech
 
 - Python 3
