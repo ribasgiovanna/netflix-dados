@@ -1,65 +1,63 @@
-# 🎬 Pipeline de Dados — Marketing Netflix (estudo de ETL)
+# Netflix Data Pipeline - ETL study
 
-Pipeline em **Python + pandas** que consolida várias planilhas de vendas por país,
-extrai a campanha de marketing da URL de rastreio (UTM) e entrega um único arquivo
-limpo em **CSV e Excel**.
+A Python and pandas pipeline that consolidates several sales spreadsheets by country,
+extracts the marketing campaign from the tracking (UTM) URL, and produces a single
+clean file in CSV and Excel.
 
-> Dados **fictícios**, criados para praticar ETL. Nenhuma informação real de clientes.
+Fictional data, created to practice ETL. No real customer information.
 
-## 🔄 Entrada → Processamento → Saída
+## Input -> Processing -> Output
 
-**Entrada:** todas as planilhas em `data/raw/*.xlsx` (uma por país / mês)
+**Input:** every spreadsheet in `data/raw/*.xlsx` (one per country / month)
 
-1. Lê cada planilha e identifica o país pelo nome do arquivo
-   (`brasil` → `Br`, `france` → `Fr`)
-2. Limpa os nomes das colunas
-3. Extrai o valor de `utm_campaign=` da URL de rastreio para uma coluna `Campanha`
-4. Renomeia as colunas para português
-   (`sale_date` → `Data de Venda`, `Amount` → `Valor`, …)
-5. Junta tudo em uma tabela só
+1. Reads each spreadsheet and identifies the country from the file name
+   (`brasil` -> `Br`, `france` -> `Fr`)
+2. Cleans the column names
+3. Extracts the `utm_campaign=` value from the tracking URL into a `Campanha` column
+4. Renames the columns to Portuguese
+5. Concatenates everything into a single table
 
-**Saída:** `data/ready/clean.csv` e `data/ready/clean.xlsx`
+**Output:** `data/ready/clean.csv` and `data/ready/clean.xlsx`
 
-## 🛠️ Tecnologias
+## Tech
 
 - Python 3
 - pandas
-- XlsxWriter (escrita do `.xlsx`)
+- XlsxWriter (`.xlsx` writing)
 
-## 📁 Estrutura
+## Structure
 
 ```
 .
 └── data/
     ├── raw/
     │   ├── netflix.py                    # pipeline
-    │   ├── netflix_202401_brasil.xlsx    # dados de exemplo
+    │   ├── netflix_202401_brasil.xlsx    # sample data
     │   └── netflix_202402_france.xlsx
     └── ready/
-        ├── clean.csv                     # resultado consolidado
+        ├── clean.csv                     # consolidated result
         └── clean.xlsx
 ```
 
-## ▶️ Como executar
+## Running
 
 ```bash
 pip install pandas xlsxwriter openpyxl
 python data/raw/netflix.py
 ```
 
-Os caminhos são resolvidos a partir do próprio script, então funciona de qualquer
-diretório. Para acrescentar fontes, coloque novas planilhas em `data/raw/` seguindo
-o padrão de nome `..._pais.xlsx`.
+Paths are resolved relative to the script itself, so it runs from any directory. To add
+sources, drop new spreadsheets into `data/raw/` following the `..._country.xlsx` naming.
 
-## 👤 Autoria
+## Authorship
 
-Desenvolvido por **Giovanna Ribas dos Reis** — projeto individual.
+Written by Giovanna Ribas dos Reis - individual project.
 
-## 🧭 Próximos passos possíveis
+## Next steps
 
-- Mapear o país por um dicionário, aceitando novos países sem alterar o código
-- Validar as colunas esperadas antes de processar
+- Map the country through a dictionary, accepting new countries without code changes
+- Validate the expected columns before processing
 
-## 🤖 Transparência
+## Transparency
 
-O código deste projeto é de autoria própria, sem geração por IA.
+The code in this project is my own work, not AI-generated.
